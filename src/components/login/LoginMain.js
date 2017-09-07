@@ -35,7 +35,7 @@ export class LoginMain extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="login">
         <div className="jumbotron">
           <h1>Spotify Search</h1>
           <p>

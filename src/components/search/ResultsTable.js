@@ -1,22 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import TableHead from './TableHead';
+import TableRow from "./TableRow";
 
 const ResultsTable = ({results=[]}) => {
   return (
     <table className="table table-striped">
-      <thead>
-      <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Username</th>
-      </tr>
-      </thead>
+      <TableHead/>
       <tbody>
-        <tr>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
+        {!!(results.length) &&
+          results.map((item, idx)=>
+            <TableRow
+              key={idx}
+              item={item}
+            />
+        )}
       </tbody>
     </table>
   );

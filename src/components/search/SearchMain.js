@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import * as searchActions from '../../actions/searchActions';
 import querystring from 'querystring';
 import SearchForm from './SearchForm';
+import ResultsTable from './ResultsTable';
 
 export class SearchMain extends React.Component {
   constructor(props, context){
@@ -46,7 +47,7 @@ export class SearchMain extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="search">
         <div className="jumbotron">
           <h1>Spotify Search</h1>
           <SearchForm
@@ -54,6 +55,13 @@ export class SearchMain extends React.Component {
             onSearch={this._getSearchResults}
           />
         </div>
+        {this.state.results.length ?
+          <ResultsTable
+            results={this.state.results}
+          />
+          :
+          <h2>No results</h2>
+        }
       </div>
     );
   }
