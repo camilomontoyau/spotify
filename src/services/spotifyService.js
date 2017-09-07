@@ -14,3 +14,12 @@ export const getSearchResults = function(searchText='', token='') {
     `https://api.spotify.com/v1/search?${query}`
   );
 };
+
+export const getCurrentTrack = function(token='') {
+  if(token) {
+    axios.defaults.headers.common['Authorization'] = token;
+  }
+  return axios.get(
+    `https://api.spotify.com/v1/me/player/currently-playing`
+  );
+};

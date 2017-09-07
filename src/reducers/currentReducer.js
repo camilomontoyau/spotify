@@ -2,9 +2,9 @@ import * as types from '../actions/actionTypes';
 
 const searchReducer = (state = {}, action) => {
     switch(action.type) {
-      case types.SET_SEARCH_RESULTS:
+      case types.SET_CURRENT_TRACK:
       return  Object.assign({}, state, {
-        results: Object.assign([], action.results)
+        currentTrack: Object.assign({}, action.currentTrack)
       });
       default:
         return state;

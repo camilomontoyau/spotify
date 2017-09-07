@@ -1,0 +1,15 @@
+.track-card {
+    display: flex;
+    flex-direction: row;
+}
+
+.track-card img{
+    max-width: 300px;
+    width: 300px;
+    height: 300px;
+    max-height: 300px;
+}
+
+ul {
+ list-style-type: none;
+}

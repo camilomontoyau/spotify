@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import LoginMain from './components/login/LoginMain';
 import SearchMain from './components/search/SearchMain';
+import CurrentMain from './components/current/CurrentMain';
 
 class App extends React.Component {
   constructor(props, context){
@@ -20,6 +21,7 @@ class App extends React.Component {
         <div>
           <Route exact path="/" component={LoginMain}/>
           <Route path="/search" component={SearchMain}/>
+          <Route path="/current" component={CurrentMain}/>
         </div>
       </Router>
     );
