@@ -3,51 +3,65 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as searchActions from '../../actions/searchActions';
-
-
+import querystring from 'querystring';
+import SearchForm from './SearchForm';
+import ResultsTable from './ResultsTable';
 
 export class SearchMain extends React.Component {
   constructor(props, context){
     super(props, context);
     this.state = {
-      message: ''
+      searchText: '',
+      results: [],
+      token: `Bearer ${querystring.parse(this.props.location.search)['?access_token']}`
     };
-    this.getMessage = this.getMessage.bind(this);
-  }
-  
-  componentWillMount() {
-    this.getMessage();
+    this._handleSearchTextState = this._handleSearchTextState.bind(this);
+    this._getSearchResults = this._getSearchResults.bind(this);
   }
   
   componentWillReceiveProps(nextProps) {
-    if(typeof nextProps.message !== 'undefined' &&
-      nextProps.message !== this.state.message
+    if(typeof nextProps.results !== 'undefined' &&
+      nextProps.results !== this.state.results
     ) {
       this.setState({
-        message: nextProps.message
+        results: nextProps.results
       });
     }
   }
   
-  getMessage() {
-    this.props.actions.getMessage();
+  _handleSearchTextState(event) {
+    this.setState({
+      searchText: event.target.value
+    });
+  }
+  
+  _getSearchResults(event) {
+    event.preventDefault();
+    if(this.state.token && this.state.searchText.length) {
+      this.props.actions.getSearchResultsAction(
+        this.state.searchText,
+        this.state.token
+      );
+    }
   }
 
   render() {
     return (
-      <div>
+      <div className="search">
         <div className="jumbotron">
           <h1>Spotify Search</h1>
-          <p>
-            <a
-              className="btn btn-lg btn-success"
-              href="#"
-              role="button"
-            >
-              {this.state.message}
-            </a>
-          </p>
+          <SearchForm
+            onChange={this._handleSearchTextState}
+            onSearch={this._getSearchResults}
+          />
         </div>
+        {this.state.results.length ?
+          <ResultsTable
+            results={this.state.results}
+          />
+          :
+          <h2>No results</h2>
+        }
       </div>
     );
   }
@@ -55,17 +69,17 @@ export class SearchMain extends React.Component {
 
 SearchMain.propTypes = {
   actions: PropTypes.object,
-  message: PropTypes.string
+  results: PropTypes.array
 };
 
 SearchMain.defaultProps = {
   actions: {},
-  message: ''
+  results: []
 };
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    message: state.search.message
+    results: state.search.results
   };
 };
 
