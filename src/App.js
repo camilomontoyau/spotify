@@ -6,6 +6,7 @@ import {
   Route
 } from 'react-router-dom';
 import LoginMain from './components/login/LoginMain';
+import SearchMain from './components/search/SearchMain';
 
 class App extends React.Component {
   constructor(props, context){
@@ -16,7 +17,10 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Route exact path="/" component={LoginMain}/>
+        <div>
+          <Route exact path="/" component={LoginMain}/>
+          <Route path="/search" component={SearchMain}/>
+        </div>
       </Router>
     );
   }
