@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as loginActions from '../../actions/loginActions';
-import './loginmain.css';
+import * as searchActions from '../../actions/searchActions';
 
 
-export class LoginMain extends React.Component {
+
+export class SearchMain extends React.Component {
   constructor(props, context){
     super(props, context);
     this.state = {
@@ -41,10 +41,10 @@ export class LoginMain extends React.Component {
           <p>
             <a
               className="btn btn-lg btn-success"
-              href="http://localhost:8888/login"
+              href="#"
               role="button"
             >
-              Login To spotify
+              {this.state.message}
             </a>
           </p>
         </div>
@@ -53,27 +53,27 @@ export class LoginMain extends React.Component {
   }
 }
 
-LoginMain.propTypes = {
+SearchMain.propTypes = {
   actions: PropTypes.object,
   message: PropTypes.string
 };
 
-LoginMain.defaultProps = {
+SearchMain.defaultProps = {
   actions: {},
   message: ''
 };
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    message: state.login.message
+    message: state.search.message
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    actions: bindActionCreators(loginActions, dispatch)
+    actions: bindActionCreators(searchActions, dispatch)
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginMain);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchMain);
 
