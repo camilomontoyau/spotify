@@ -8,6 +8,7 @@ const TrackCard = ({currentTrack={}}) => {
       {!!(currentTrack.album && currentTrack.album.images) &&
       <img
         src={currentTrack.album.images[0].url}
+        alt="album cover"
       />}
       <ul>
         <li>

@@ -6,6 +6,7 @@ import * as searchActions from '../../actions/searchActions';
 import querystring from 'querystring';
 import SearchForm from './SearchForm';
 import ResultsTable from './ResultsTable';
+import Nav from '../common/Nav';
 
 export class SearchMain extends React.Component {
   constructor(props, context){
@@ -48,6 +49,10 @@ export class SearchMain extends React.Component {
   render() {
     return (
       <div className="search">
+        <Nav
+          active="search"
+          token={querystring.parse(this.props.location.search)['?access_token']}
+        />
         <div className="jumbotron">
           <h1>Spotify Search</h1>
           <SearchForm

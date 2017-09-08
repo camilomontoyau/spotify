@@ -23,3 +23,12 @@ export const getCurrentTrack = function(token='') {
     `https://api.spotify.com/v1/me/player/currently-playing`
   );
 };
+
+export const isLogged = function(token='') {
+  if(token) {
+    axios.defaults.headers.common['Authorization'] = token;
+  }
+  return axios.get(
+    `https://api.spotify.com/v1/me`
+  );
+};
