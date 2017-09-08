@@ -2,9 +2,9 @@ import * as types from '../actions/actionTypes';
 
 const loginReducer = (state = {}, action) => {
     switch(action.type) {
-      case types.SET_LOGIN_MESSAGE:
+      case types.SET_LOGGED:
       return  Object.assign({}, state, {
-        message: action.message
+        logged: action.logged
       });
       default:
         return state;

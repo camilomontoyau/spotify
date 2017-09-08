@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as loginActions from '../../actions/loginActions';
 import './loginmain.css';
+import Nav from '../common/Nav';
 
 
 export class LoginMain extends React.Component {
@@ -12,11 +13,11 @@ export class LoginMain extends React.Component {
     this.state = {
       message: ''
     };
-    this.getMessage = this.getMessage.bind(this);
+    
   }
   
   componentWillMount() {
-    this.getMessage();
+  
   }
   
   componentWillReceiveProps(nextProps) {
@@ -29,13 +30,10 @@ export class LoginMain extends React.Component {
     }
   }
   
-  getMessage() {
-    this.props.actions.getMessage();
-  }
-
   render() {
     return (
       <div className="login">
+        <Nav/>
         <div className="jumbotron">
           <h1>Spotify Search</h1>
           <p>

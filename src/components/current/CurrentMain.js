@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import * as currentActions from '../../actions/currentActions';
 import querystring from 'querystring';
 import TrackCard from './TrackCard';
+import Nav from "../common/Nav";
 export class CurrentMain extends React.Component {
   constructor(props, context){
     super(props, context);
@@ -40,6 +41,10 @@ export class CurrentMain extends React.Component {
   render() {
     return (
       <div className="search">
+        <Nav
+          active="current"
+          token={querystring.parse(this.props.location.search)['?access_token']}
+        />
         <div className="jumbotron">
           <h1>Spotify Search</h1>
         </div>

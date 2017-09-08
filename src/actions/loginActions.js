@@ -1,10 +1,17 @@
 import * as types from './actionTypes';
-export const setLoginMessage = (message)=>{
-  return {type: types.SET_LOGIN_MESSAGE, message};
+import {isLogged} from '../services/spotifyService';
+export const setLogged = (logged = false)=>{
+  return {type: types.SET_LOGGED, logged};
 };
 
-export const getMessage = () => {
+export const isLoggedAction = (token='') => {
   return (dispatch)=>{
-    dispatch(setLoginMessage('this message comes from the state'));
+    return isLogged(token)
+    .then(()=>{
+      dispatch(setLogged(true));
+    })
+    .catch(()=>{
+      dispatch(setLogged(false));
+    });
   };
 };
