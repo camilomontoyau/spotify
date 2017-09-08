@@ -22,8 +22,9 @@
     "request": "^2.81.0"
   },
   "scripts": {
-    "spotify": "node server.js",
-    "start": "react-scripts start",
+    "spotify": "node server.js &",
+    "react": "react-scripts start",
+    "start": "yarn spotify && yarn react",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
