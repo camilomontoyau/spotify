@@ -1,21 +1,21 @@
-#Spotify code challenge 
+# Spotify code challenge 
 
-####steps to run the project
+#### steps to run the project
 
 1. clone the repo
 2. ```yarn install``` or ```npm install```
 3. ```yarn start``` or ```npm start```
 4. open browser in `http://localhost:3000`
 
-####summary
+#### summary
 
-#####This project has three routes: 
+##### This project has three routes: 
 
 `/` this route renders the login page
 `/search` this route needs authentication first and then you can seach for songs
 `/current` shows a song that the current user is currently playing
 
-#####The directory structure is given by react-create-app but all the stuff inside `/src` is created the following way:
+##### The directory structure is given by react-create-app but all the stuff inside `/src` is created the following way:
 
 `/src/components` Has all the react JSX components
 `/src/components/login` contains the web components for "login" view
