@@ -4,7 +4,7 @@
 
 1. clone the repo
 2. ```yarn install``` or ```npm install```
-3. ```yarn start``` or ```npm start```
+3. ```yarn start``` or ```npm start``` this runs node server.js (needed for login) and create-react-app servers
 4. open browser in `http://localhost:3000`
 
 #### summary
