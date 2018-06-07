@@ -9,11 +9,15 @@
 
 #### summary
 
-##### This project has three routes: 
+##### This project has four routes: 
 
 `/` this route renders the login page
+
 `/search` this route needs authentication first and then you can seach for songs
+
 `/current` shows a song that the current user is currently playing
+
+# `/following` shows the top 50 artists followed by the current logged user
 
 ##### The directory structure is given by react-create-app but all the stuff inside `/src` is created the following way:
 
