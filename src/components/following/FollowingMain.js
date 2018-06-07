@@ -2,67 +2,54 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as searchActions from '../../actions/searchActions';
+import * as followingActions from '../../actions/followingActions';
 import querystring from 'querystring';
-import SearchForm from './SearchForm';
 import ResultsTable from './ResultsTable';
 import Nav from '../common/Nav';
 
-export class SearchMain extends React.Component {
+export class FollowingMain extends React.Component {
   constructor(props, context){
     super(props, context);
     this.state = {
-      searchText: '',
-      results: [],
+      followingArtists: [],
       token: `Bearer ${querystring.parse(this.props.location.search)['?access_token']}`
     };
-    this._handleSearchTextState = this._handleSearchTextState.bind(this);
-    this._getSearchResults = this._getSearchResults.bind(this);
+    this._getFollowingArtists = this._getFollowingArtists.bind(this);
   }
   
+  componentDidMount() {
+    this._getFollowingArtists();
+  }
+
   componentWillReceiveProps(nextProps) {
-    if(typeof nextProps.results !== 'undefined' &&
-      nextProps.results !== this.state.results
+    if(typeof nextProps.followingArtists !== 'undefined' &&
+      nextProps.followingArtists !== this.state.followingArtists
     ) {
       this.setState({
-        results: nextProps.results
+        followingArtists: nextProps.followingArtists
       });
     }
   }
   
-  _handleSearchTextState(event) {
-    this.setState({
-      searchText: event.target.value
-    });
-  }
-  
-  _getSearchResults(event) {
-    event.preventDefault();
-    if(this.state.token && this.state.searchText.length) {
-      this.props.actions.getSearchResultsAction(
-        this.state.searchText,
-        this.state.token
-      );
+  _getFollowingArtists(event) {
+    if(this.state.token) {
+      this.props.actions.getFollowingArtistsAction(this.state.token);
     }
   }
 
   render() {
+    let {followingArtists} = this.state;
+    let {me} = this.props;
     return (
       <div className="search">
         <Nav
           active="following"
           token={querystring.parse(this.props.location.search)['?access_token']}
         />
-        <div className="jumbotron">
-          <h1>Spotify Search</h1>
-          <SearchForm
-            onChange={this._handleSearchTextState}
-            onSearch={this._getSearchResults}
-          />
-        </div>
-        {this.state.results.length ?
+        {!!(me) && <h1>User: {!!(me.id) ? me.id : ''}</h1>}
+        {followingArtists.length ?
           <ResultsTable
-            results={this.state.results}
+            results={followingArtists}
           />
           :
           <h2>No results</h2>
@@ -72,27 +59,28 @@ export class SearchMain extends React.Component {
   }
 }
 
-SearchMain.propTypes = {
+FollowingMain.propTypes = {
   actions: PropTypes.object,
   results: PropTypes.array
 };
 
-SearchMain.defaultProps = {
+FollowingMain.defaultProps = {
   actions: {},
   results: []
 };
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    results: state.search.results
+    followingArtists: state.following.followingArtists,
+    me: state.login.me
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    actions: bindActionCreators(searchActions, dispatch)
+    actions: bindActionCreators(followingActions, dispatch)
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchMain);
+export default connect(mapStateToProps, mapDispatchToProps)(FollowingMain);
 

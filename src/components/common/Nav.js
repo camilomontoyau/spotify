@@ -26,7 +26,7 @@ const Nav = ({active='', token = ''}) => {
           <a href={`/following/?access_token=${token}`}>Following</a>
         </li>
       </ul>}
-      {(active!=='search' && active !== 'current') &&
+      {(active!=='search' && active !== 'current' && active !== 'following') &&
         <ul className="nav nav-pills">
           <li
             role="presentation"

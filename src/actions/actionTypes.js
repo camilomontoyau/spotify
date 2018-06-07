@@ -4,3 +4,4 @@ export const SET_SEARCH_RESULTS = 'SET_SEARCH_RESULTS';
 export const SET_CURRENT_TRACK = 'SET_CURRENT_TRACK';
 export const SET_LOGGED = 'SET_LOGGED';
 export const SET_FOLLOWING_ARTISTS = 'SET_FOLLOWING_ARTISTS';
+export const SET_ME = 'SET_ME';

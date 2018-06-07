@@ -4,9 +4,9 @@ const TableHead = () => {
   return (
     <thead>
       <tr>
+        <th>#</th>
         <th>Artist</th>
-        <th>Track</th>
-        <th>Album</th>
+        <th>Popularity rate</th>
       </tr>
     </thead>
   );

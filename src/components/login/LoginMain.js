@@ -16,8 +16,8 @@ export class LoginMain extends React.Component {
     
   }
   
-  componentWillMount() {
-  
+  componentDidMount() {
+    
   }
   
   componentWillReceiveProps(nextProps) {

@@ -12,6 +12,7 @@ const ResultsTable = ({results=[]}) => {
           results.map((item, idx)=>
             <TableRow
               key={idx}
+              index={idx+1}
               item={item}
             />
         )}

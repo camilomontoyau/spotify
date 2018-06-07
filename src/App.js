@@ -20,6 +20,19 @@ class App extends React.Component {
       token: querystring.parse(window.location.href.split('?')[1])['access_token'] ? `Bearer ${querystring.parse(window.location.href.split('?')[1])['access_token']}` : null
     };
   }
+
+  componentDidMount() {
+    this.props.actions.isLoggedAction(this.state.token);
+    if(this.props.logged === false) {
+      this.setState({token: null});
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(typeof nextProps.logged !== 'undefined' && nextProps.logged === false) {
+      this.setState({token: null});
+    }
+  }
   
   render() {
     return (

@@ -29,7 +29,7 @@ export const getFollowingArtists = function(token='') {
     axios.defaults.headers.common['Authorization'] = token;
   }
   return axios.get(
-    `https://api.spotify.com/v1/me/following?type=artist`
+    `https://api.spotify.com/v1/me/following?type=artist&limit=50`
   );
 };
 

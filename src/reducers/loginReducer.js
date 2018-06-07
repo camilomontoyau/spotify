@@ -6,6 +6,10 @@ const loginReducer = (state = {}, action) => {
       return  Object.assign({}, state, {
         logged: action.logged
       });
+      case types.SET_ME:
+      return  Object.assign({}, state, {
+        me: action.me
+      });
       default:
         return state;
     }
