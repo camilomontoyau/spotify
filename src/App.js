@@ -10,44 +10,22 @@ import {
 import LoginMain from './components/login/LoginMain';
 import SearchMain from './components/search/SearchMain';
 import CurrentMain from './components/current/CurrentMain';
+import FollowingMain from './components/following/FollowingMain';
 import querystring from 'querystring';
 
 class App extends React.Component {
   constructor(props, context){
     super(props, context);
     this.state = {
-      logged: false,
-      token: `Bearer ${querystring.parse(window.location.href.split('?')[1])['access_token']}`
+      token: querystring.parse(window.location.href.split('?')[1])['access_token'] ? `Bearer ${querystring.parse(window.location.href.split('?')[1])['access_token']}` : null
     };
-    this.isLogged = this.isLogged.bind(this);
   }
   
-  componentWillMount(){
-    if(!!(this.state.token)){
-      this.isLogged(this.state.token);
-    }
-  }
-  
-  componentWillReceiveProps (nextProps) {
-    if(typeof nextProps.logged !== 'undefined' &&
-      this.state.logged !== nextProps.logged
-    ) {
-      this.setState({
-        logged: nextProps.logged
-      });
-    }
-  }
-  
-  isLogged (token='') {
-    this.props.actions.isLoggedAction(token);
-  }
-
   render() {
     return (
       <Router>
         <div>
-          {!this.state.logged && <Route path="/" component={LoginMain}/>}
-          {this.state.logged &&
+          {!(this.state.token) ? <Route path="/" component={LoginMain}/> :
             <div>
               <Route
                 exact
@@ -58,6 +36,10 @@ class App extends React.Component {
                 exact
                 path="/current"
                 component={CurrentMain}/>
+              <Route
+                exact
+                path="/following"
+                component={FollowingMain}/>
             </div>
           }
         </div>
@@ -75,6 +57,7 @@ App.defaultProps = {
 };
 
 const mapStateToProps = (state, ownProps) => {
+  console.log('state', state);
   return {
     logged: state.login.logged
   };

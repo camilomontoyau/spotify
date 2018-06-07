@@ -24,6 +24,15 @@ export const getCurrentTrack = function(token='') {
   );
 };
 
+export const getFollowingArtists = function(token='') {
+  if(token) {
+    axios.defaults.headers.common['Authorization'] = token;
+  }
+  return axios.get(
+    `https://api.spotify.com/v1/me/following?type=artist`
+  );
+};
+
 export const isLogged = function(token='') {
   if(token) {
     axios.defaults.headers.common['Authorization'] = token;
